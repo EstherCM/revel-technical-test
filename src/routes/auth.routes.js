@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { signup, signin } = require('../controllers/auth.controller');
+const { validSingUpEvent, checkDuplicateEmail, validSingInEvent } = require('../middlewares/auth.middleware');
 
-router.post('/signup', signup);
+router.post('/signup', validSingUpEvent, checkDuplicateEmail, signup);
 
-router.post('/signin', signin);
+router.post('/signin', validSingInEvent, signin);
 
 module.exports = router;

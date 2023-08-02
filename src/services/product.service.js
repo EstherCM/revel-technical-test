@@ -1,9 +1,7 @@
 const productModel = require('../database/models/product.model');
 const _ = require('underscore');
 
-const createProduct = async (body) => {
-  const { name, description, category, price } = body;
-
+const createProduct = async ({ name, description, category, price }) => {
   try {
     return await productModel.create({ name, description, category, price });
   } catch (e) {

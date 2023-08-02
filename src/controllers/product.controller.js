@@ -4,24 +4,24 @@ const createProduct = async (req, res) => {
   const { body: { name, description, category, price } } = req;
 
   if (!name || !description || !category || !price) {
-    res.send({ status: 400, error: 'Bad Request: Some properties are missing' });
+    res.status(400).json({ message: 'Bad Request: Some properties are missing' });
   }
 
   const createdProduct = await productService.createProduct(req.body);
 
-  res.status(201).send({ data: createdProduct });
+  res.status(201).json({ data: createdProduct });
 };
 
 const getProducts = async (req, res) => {
   const products = await productService.getProducts(req.query);
 
-  res.status(200).send({ data: products });
+  res.status(200).json({ data: products });
 };
 
 const updateProduct = async (req, res) => {
   const updatedProduct = await productService.updateProduct(req.params.id);
 
-  res.status(200).send({ data: updatedProduct });
+  res.status(200).json({ data: updatedProduct });
 };
 
 const deleteProduct = async (req, res) => {
