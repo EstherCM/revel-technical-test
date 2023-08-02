@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 const schema = new Schema({
   name: {
@@ -13,7 +14,7 @@ const schema = new Schema({
     trim: true,
   },
   password: {
-    type: Number,
+    type: String,
     required: true,
     trim: true,
   },
@@ -24,6 +25,23 @@ const schema = new Schema({
 }, {
   timestamp: true,
 });
+
+schema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    try {
+      this.password = await bcrypt.hash(this.password, 10)
+    } catch (e) {
+      console.error(`🔥 Error in pre save ${e}`);
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+schema.methods.checkPassword = function (passwordToCompare) {
+  return bcrypt.compare(passwordToCompare, this.password);
+}
 
 const User = mongoose.model('User', schema);
 

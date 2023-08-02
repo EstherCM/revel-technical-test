@@ -1,9 +1,9 @@
-const productModel = require('../database/models/product.model');
+const Product = require('../database/models/product.model');
 const _ = require('underscore');
 
 const createProduct = async ({ name, description, category, price }) => {
   try {
-    return await productModel.create({ name, description, category, price });
+    return await Product.create({ name, description, category, price });
   } catch (e) {
     console.error(`🔥 Error creating product ${e}`);
   }
@@ -21,7 +21,7 @@ const getProducts = async (query) => {
   });
 
   try {
-    return await productModel.find(criterial);
+    return await Product.find(criterial);
   } catch (e) {
     console.error(`🔥 Error creating product ${e}`);
   }

@@ -7,4 +7,6 @@ router.post('/signup', validSingUpEvent, checkDuplicateEmail, signup);
 
 router.post('/signin', validSingInEvent, signin);
 
+//TODO: delete user
+
 module.exports = router;
