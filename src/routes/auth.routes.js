@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { signup, signin } = require('../controllers/auth.controller');
-const { validSingUpEvent, checkDuplicateEmail, validSingInEvent } = require('../middlewares/auth.middleware');
+const { signup, signin, deleteUser } = require('../controllers/auth.controller');
+const { validSignUpEvent, checkDuplicateEmail, validSignInEvent, checkPermissions } = require('../middlewares/auth.middleware');
+const { verifyToken } = require('../middlewares/jwt.middleware');
 
-router.post('/signup', validSingUpEvent, checkDuplicateEmail, signup);
+router.post('/signup', validSignUpEvent, checkDuplicateEmail, signup);
 
-router.post('/signin', validSingInEvent, signin);
+router.post('/signin', validSignInEvent, signin);
 
-//TODO: delete user
+router.delete('/users/:id', verifyToken, checkPermissions, deleteUser);
 
 module.exports = router;

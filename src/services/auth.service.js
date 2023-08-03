@@ -1,9 +1,9 @@
 const User = require('../database/models/auth.model');
 const jwt = require('jsonwebtoken');
 
-const signup = async ({ name, email, password }) => {
+const signup = async ({ name, email, password, role }) => {
   try {
-    return await User.create({ name, email, password });
+    return await User.create({ name, email, password, role });
   } catch (e) {
     console.error(`🔥 Error registering user ${e}`);
   }
@@ -14,6 +14,7 @@ const signin = async ({ email, password }) => {
     const foundUser = await User.findOne({ email });
 
     if (!foundUser) {
+      console.log('🤷 User not found');
       return { error: 'Not Found' };
     }
 
@@ -37,7 +38,22 @@ const signin = async ({ email, password }) => {
   }
 };
 
+const deleteUser = async (id) => {
+  try {
+    const { deletedCount } = await User.deleteOne({ _id: id });
+
+    if (deletedCount !== 1) {
+      return { message: 'Something was wrong' };
+    }
+    return { sucess: true };
+  } catch (e) {
+    console.error(`🔥 Error deleting user ${e}`);
+    return { message: e };
+  }
+};
+
 module.exports = {
   signup,
   signin,
+  deleteUser
 };

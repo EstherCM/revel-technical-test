@@ -1,8 +1,8 @@
 const authService = require('../services/auth.service');
 
 const signup = async (req, res) => {
-  const { body: { name, email, password } } = req;
-  const createdUser = await authService.signup({ name, email, password });
+  const { body: { name, email, password, role } } = req;
+  const createdUser = await authService.signup({ name, email, password, role });
 
   res.status(201).json({ message: createdUser });
 };
@@ -18,7 +18,17 @@ const signin = async (req, res) => {
   res.status(200).json(result);
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const result = await authService.deleteUser(req.params.id);
+    res.status(200).json(result);
+  } catch (e) {
+    return res.status(500).json({ message: e });
+  }
+};
+
 module.exports = {
   signup,
-  signin
+  signin,
+  deleteUser
 }

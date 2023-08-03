@@ -10,6 +10,7 @@ const verifyToken = (req, res, next) => {
   const [ bearer , token ] = authorization.split(' ');
 
   if (bearer !== 'Bearer') {
+    console.error('❌ Bearer not provided');
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
@@ -19,6 +20,7 @@ const verifyToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET || 'super secret', (err, decoded) => {
     if (err) {
+      console.error(`🔥 Error verifying jwt ${err}`);
       return res.status(401).json({ message: 'Unauthorized' });
     }
     req.user = decoded;
