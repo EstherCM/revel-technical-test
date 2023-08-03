@@ -1,14 +1,8 @@
 const productService = require('../services/product.service');
 
 const createProduct = async (req, res) => {
-  const { body: { name, description, category, price } } = req;
-  const createdBy = req.user.id;
-
-  if (!name || !description || !category || !price) {
-    return res.status(400).json({ message: 'Bad Request: Some properties are missing' });
-  }
-
   try {
+    const createdBy = req.user.id;
     const createdProduct = await productService.createProduct(req.body, createdBy);
 
     res.status(201).json({ data: createdProduct });

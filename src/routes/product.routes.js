@@ -3,8 +3,9 @@ const router = express.Router();
 const { createProduct, getProducts, updateProduct, deleteProduct } = require('../controllers/product.controller');
 const { verifyToken } = require('../middlewares/jwt.middleware');
 const { dataSecurity } = require('../middlewares/auth.middleware');
+const { validCreateProductEvent } = require('../middlewares/product.middleware');
 
-router.post('/products', verifyToken, createProduct);
+router.post('/products', verifyToken, validCreateProductEvent, createProduct);
 
 router.get('/products', verifyToken, getProducts);
 
