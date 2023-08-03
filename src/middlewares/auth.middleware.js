@@ -1,4 +1,4 @@
-const User = require('../database/models/auth.model');
+const User = require('../database/models/user.model');
 const Product = require('../database/models/product.model');
 
 const validSignUpEvent = (req, res, next) => {
