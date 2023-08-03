@@ -2,8 +2,8 @@ require('dotenv').config();
 require('./database');
 
 const express = require('express');
-const authRouter = require('./routes/auth.routes');
-const productRouter = require('./routes/product.routes');
+const authRouter = require('./routes/authRoutes');
+const productRouter = require('./routes/productRoutes');
 const port = process.env.PORT || 3000;
 const app = express();
 

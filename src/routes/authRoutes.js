@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { signup, signin, deleteUser } = require('../controllers/auth.controller');
-const { validSignUpEvent, checkDuplicateEmail, validSignInEvent, checkPermissions } = require('../middlewares/auth.middleware');
-const { verifyToken } = require('../middlewares/jwt.middleware');
+const { signup, signin, deleteUser } = require('../controllers/authCtrl');
+const { validSignUpEvent, checkDuplicateEmail, validSignInEvent, checkPermissions } = require('../middlewares/authMiddleware');
+const { verifyToken } = require('../middlewares/jwtMiddleware');
 
 router.post('/signup', validSignUpEvent, checkDuplicateEmail, signup);
 
