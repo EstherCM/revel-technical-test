@@ -1,11 +1,11 @@
-const Product = require('../database/models/product.model');
+const ProductDAO = require('../database/daos/productDAO');
 const _ = require('underscore');
 
 const createProduct = async ({ name, description, category, price }, createdBy) => {
   try {
-    return await Product.create({ name, description, category, price, createdBy });
+    return await ProductDAO.create({ name, description, category, price, createdBy });
   } catch (e) {
-    console.error(`🔥 Error creating product ${e}`);
+    return { message: e };
   }
 };
 
@@ -21,34 +21,29 @@ const getProducts = async (query) => {
   });
 
   try {
-    return await Product.find(criterial);
+    return await ProductDAO.get(criterial);
   } catch (e) {
-    console.error(`🔥 Error creating product ${e}`);
+    return { message: e };
   }
 };
 
 const updateProduct = async (id, { name, description, category, price }) => {
   try {
-    return await Product.findOneAndUpdate(
-      { _id: id },
-      { name, description, category, price },
-      { new: true }
-    );
+    return await ProductDAO.update(id, { name, description, category, price });
   } catch (e) {
-    console.error(`🔥 Error updating product ${e}`);
+    return { message: e };
   }
 };
 
 const deleteProduct = async (id) => {
   try {
-    const { deletedCount } = await Product.deleteOne({ _id: id });
+    const { deletedCount } = await ProductDAO.remove(id);
 
     if (deletedCount !== 1) {
       return { message: 'Something was wrong' };
     }
     return { sucess: true };
   } catch (e) {
-    console.error(`🔥 Error deleting product ${e}`);
     return { message: e };
   }
 };
