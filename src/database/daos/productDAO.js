@@ -1,4 +1,4 @@
-const Product = require("../models/product.model");
+const Product = require('../models/product.model');
 
 const create = async (body) => {
   try {
@@ -9,11 +9,11 @@ const create = async (body) => {
   }
 };
 
-const get = async (query) => {
+const getBy = async (query) => {
   try {
     return await Product.find(query);
   } catch (e) {
-    console.error(`🔥 [DAO] Error creating product ${e}`);
+    console.error(`🔥 [DAO] Error getting product by ${query} ${e}`);
     return e;
   }
 };
@@ -38,7 +38,7 @@ const remove = async (id) => {
 
 module.exports = {
   create,
-  get,
+  getBy,
   update,
   remove
 };

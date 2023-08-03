@@ -1,17 +1,17 @@
-const User = require('../database/models/auth.model');
+const userDAO = require('../database/daos/userDAO');
 const jwt = require('jsonwebtoken');
 
 const signup = async ({ name, email, password, role }) => {
   try {
-    return await User.create({ name, email, password, role });
+    return await userDAO.create({ name, email, password, role });
   } catch (e) {
-    console.error(`🔥 Error registering user ${e}`);
+    return { error: e };
   }
 };
 
 const signin = async ({ email, password }) => {
   try {
-    const foundUser = await User.findOne({ email });
+    const foundUser = await userDAO.get({ email });
 
     if (!foundUser) {
       console.log('🤷 User not found');
@@ -35,20 +35,21 @@ const signin = async ({ email, password }) => {
     return { error: 'Email or password incorrect' };
   } catch (e) {
     console.error(`🔥 Error in login ${e}`);
+    return { error: e };
   }
 };
 
 const deleteUser = async (id) => {
   try {
-    const { deletedCount } = await User.deleteOne({ _id: id });
+    const { deletedCount } = await userDAO.remove(id);
 
     if (deletedCount !== 1) {
-      return { message: 'Something was wrong' };
+      return { error: 'Something was wrong. User couldn\'t be removed' };
     }
     return { sucess: true };
   } catch (e) {
     console.error(`🔥 Error deleting user ${e}`);
-    return { message: e };
+    return { error: e };
   }
 };
 

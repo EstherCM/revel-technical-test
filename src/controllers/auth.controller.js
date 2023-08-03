@@ -2,20 +2,28 @@ const authService = require('../services/auth.service');
 
 const signup = async (req, res) => {
   const { body: { name, email, password, role } } = req;
-  const createdUser = await authService.signup({ name, email, password, role });
+  try {
+    const createdUser = await authService.signup({ name, email, password, role });
 
-  res.status(201).json({ message: createdUser });
+    res.status(201).json({ data: createdUser });
+  } catch (e) {
+    return res.status(500).json(e);
+  }
 };
 
 const signin = async (req, res) => {
   const { body: { email, password } } = req;
-  const result = await authService.signin({ email, password });
+  try {
+    const result = await authService.signin({ email, password });
 
-  if (result.error) {
-    return res.status(404).json({ message: result.error });
+    if (result.error) {
+      return res.status(404).json(result.error);
+    }
+
+    res.status(200).json(result);
+  } catch (e) {
+    return res.status(500).json(e);
   }
-
-  res.status(200).json(result);
 };
 
 const deleteUser = async (req, res) => {
@@ -23,7 +31,7 @@ const deleteUser = async (req, res) => {
     const result = await authService.deleteUser(req.params.id);
     res.status(200).json(result);
   } catch (e) {
-    return res.status(500).json({ message: e });
+    return res.status(500).json(e);
   }
 };
 

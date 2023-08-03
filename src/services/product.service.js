@@ -5,7 +5,7 @@ const createProduct = async ({ name, description, category, price }, createdBy) 
   try {
     return await ProductDAO.create({ name, description, category, price, createdBy });
   } catch (e) {
-    return { message: e };
+    return { error: e };
   }
 };
 
@@ -21,9 +21,9 @@ const getProducts = async (query) => {
   });
 
   try {
-    return await ProductDAO.get(criterial);
+    return await ProductDAO.getBy(criterial);
   } catch (e) {
-    return { message: e };
+    return { error: e };
   }
 };
 
@@ -31,7 +31,7 @@ const updateProduct = async (id, { name, description, category, price }) => {
   try {
     return await ProductDAO.update(id, { name, description, category, price });
   } catch (e) {
-    return { message: e };
+    return { error: e };
   }
 };
 
@@ -40,11 +40,11 @@ const deleteProduct = async (id) => {
     const { deletedCount } = await ProductDAO.remove(id);
 
     if (deletedCount !== 1) {
-      return { message: 'Something was wrong' };
+      return { error: 'Something was wrong' };
     }
     return { sucess: true };
   } catch (e) {
-    return { message: e };
+    return { error: e };
   }
 };
 
