@@ -28,7 +28,6 @@ const updateProduct = async (req, res, next) => {
 
     res.status(200).json({ data: updatedProduct });
   } catch (e) {
-    console.error(`[productCtrl] 🔥 Error updating product ${e}`);
     return next(e);
   }
 };

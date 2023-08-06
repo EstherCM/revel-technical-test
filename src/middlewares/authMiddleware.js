@@ -57,7 +57,7 @@ const dataSecurity = async (req, _res, next) => {
       }
 
       if (foundProduct.createdBy != userId) {
-        console.error('❌ Product owns another user', foundProduct, foundProduct.createdBy, userId);
+        console.error('❌ Product owns another user');
         return next(createError(401));
       }
       return next();
