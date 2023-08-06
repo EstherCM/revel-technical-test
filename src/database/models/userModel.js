@@ -27,16 +27,18 @@ const schema = new Schema({
 });
 
 schema.pre('save', async function (next) {
+  this.role = 'user';
+
   if (this.isModified('password')) {
     try {
-      this.password = await bcrypt.hash(this.password, 10)
+      this.password = await bcrypt.hash(this.password, 10);
     } catch (e) {
       console.error(`🔥 Error in pre save ${e}`);
       next();
     }
-  } else {
-    next();
   }
+  next();
+
 });
 
 schema.methods.checkPassword = function (passwordToCompare) {

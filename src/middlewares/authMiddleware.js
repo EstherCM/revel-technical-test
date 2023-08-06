@@ -1,67 +1,69 @@
-const User = require('../database/models/userModel');
-const Product = require('../database/models/productModel');
+const userDAO = require('../database/daos/userDAO');
+const productDAO = require('../database/daos/productDAO');
+const createError = require('http-errors');
 
-const validSignUpEvent = (req, res, next) => {
-  const { body: { name, email, password, role } } = req;
+const validSignUpEvent = (req, _res, next) => {
+  const { body: { name, email, password } } = req;
 
-  if (!name || !email || !password || !role) {
-    return res.status(400).json({ message: 'Bad Request: Some properties are missing' });
+  if (!name || !email || !password) {
+    return next(createError(400, 'Bad Request: Some properties are missing'));
   }
 
   next();
 };
 
-const checkDuplicateEmail = async (req, res, next) => {
+const checkDuplicateEmail = async (req, _res, next) => {
   try {
-    const foundUser = await User.findOne({ email: req.body.email });
+    const foundUser = await userDAO.get({ email: req.body.email });
 
     if (foundUser) {
-      return res.status(400).json({ message: 'Bad Request: Email is already in use' });
+      return next(createError(400, 'Bad Request: Email is already in use'));
     }
     next();
   } catch(e) {
     console.error(`🔥 Error finding user by email ${e}`);
-    return res.status(500).json({ message: 'Internal server error' });
+    return next(e);
   }
 };
 
-const validSignInEvent = (req, res, next) => {
+const validSignInEvent = (req, _res, next) => {
   const { body: { email, password } } = req;
 
   if (!email || !password) {
-    return res.status(400).json({ message: 'Bad Request: Some properties are missing' });
+    return next(createError(400, 'Bad Request: Some properties are missing'));
   }
 
   next();
 };
 
-const checkPermissions = (req, res, next) => {
+const checkPermissions = (req, _res, next) => {
   if (req.user.role !== 'admin') {
     console.error('❌ No admin');
-    return res.status(401).json({ message: 'Unauthorized' });
+    return next(createError(401));
   }
   next();
 };
 
-const dataSecurity = async (req, res, next) => {
+const dataSecurity = async (req, _res, next) => {
   const { user: { role, id: userId }, params: { id: productId } } = req;
 
   if (role !== 'admin') {
     try {
-      const foundProduct = await Product.findOne({ id: productId });
+      const [ foundProduct ] = await productDAO.getBy({ _id: productId });
   
       if (!foundProduct) {
-        return res.status(404).json({ message: 'Not found' });
+        console.error('❌ Product not found', productId);
+        return next(createError(404));
       }
 
-      if (foundProduct.createdBy !== userId) {
-        console.error('❌ Product owns another user');
-        return res.status(401).json({ message: 'Unauthorized' });
+      if (foundProduct.createdBy != userId) {
+        console.error('❌ Product owns another user', foundProduct, foundProduct.createdBy, userId);
+        return next(createError(401));
       }
-      next();
+      return next();
     } catch(e) {
       console.error(`🔥 Error finding product by id ${e}`);
-      return res.status(500).json({ message: 'Internal server error' });
+      return next(e);
     }
   }
   next();

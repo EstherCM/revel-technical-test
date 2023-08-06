@@ -23,9 +23,9 @@ const schema = new Schema({
     trim: true,
   },
   createdBy: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
-    trim: true,
+    ref: 'User',
   }
 }, {
   timestamp: true,

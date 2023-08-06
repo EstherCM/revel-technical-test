@@ -20,7 +20,7 @@ const getBy = async (query) => {
 
 const update = async (id, propsToUpdate) => {
   try {
-    return await Product.findOneAndUpdate({ _id: id }, propsToUpdate, { new: true });
+    return await Product.findByIdAndUpdate({ _id: id }, propsToUpdate, { new: true });
   } catch (e) {
     console.error(`🔥 [DAO] Error updating product ${e}`);
     return e;
