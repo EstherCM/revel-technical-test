@@ -6,169 +6,169 @@ jest.mock('../../services/authService');
 describe('[authCtrl] unit test', () => {
   describe('signup', () => {
     it('should register an user', async () => {
-      const reqMocked = {
+      const mockedReq = {
         body: {
-          name: 'nameMocked',
+          name: 'mockedName',
           email: 'a@mail.com',
-          password: 'passwordMocked',
+          password: 'mockedPassword',
         },
       };
-      const resMocked = {
+      const mockedRes = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const nextMocked = jest.fn();
+      const mockedNext = jest.fn();
 
       authService.signup.mockResolvedValue({
-        _id: 'idMocked',
-        name: 'nameMocked',
+        _id: 'mockedId',
+        name: 'mockedName',
         email: 'a@mail.com',
       });
 
-      await signup(reqMocked, resMocked, nextMocked);
+      await signup(mockedReq, mockedRes, mockedNext);
 
-      expect(resMocked.status).toHaveBeenCalledWith(201);
-      expect(resMocked.json).toHaveBeenCalledWith({
+      expect(mockedRes.status).toHaveBeenCalledWith(201);
+      expect(mockedRes.json).toHaveBeenCalledWith({
         data: {
-          _id: 'idMocked',
-          name: 'nameMocked',
+          _id: 'mockedId',
+          name: 'mockedName',
           email: 'a@mail.com'
         }
       });
     });
 
     it('should failed when something is wrong', async () => {
-      const reqMocked = {
+      const mockedReq = {
         body: {
-          name: 'nameMocked',
+          name: 'mockedName',
           email: 'a@mail.com',
-          password: 'passwordMocked',
+          password: 'mockedPassword',
         },
       };
-      const resMocked = {
+      const mockedRes = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const nextMocked = jest.fn();
+      const mockedNext = jest.fn();
 
       authService.signup.mockRejectedValue('Error creating user');
 
-      await signup(reqMocked, resMocked, nextMocked);
+      await signup(mockedReq, mockedRes, mockedNext);
 
-      expect(resMocked.json).toHaveBeenCalledTimes(0);
-      expect(resMocked.status).toHaveBeenCalledTimes(0);
-      expect(nextMocked).toHaveBeenCalled();
+      expect(mockedRes.json).toHaveBeenCalledTimes(0);
+      expect(mockedRes.status).toHaveBeenCalledTimes(0);
+      expect(mockedNext).toHaveBeenCalled();
     });
   });
 
   describe('signin', () => {
     it('should return accessToken', async () => {
-      const reqMocked = {
+      const mockedReq = {
         body: {
           email: 'a@mail.com',
-          password: 'passwordMocked',
+          password: 'mockedPassword',
         },
       };
-      const resMocked = {
+      const mockedRes = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const nextMocked = jest.fn();
+      const mockedNext = jest.fn();
 
-      authService.signin.mockResolvedValue({ accessToken: 'accessTokenMocked' });
+      authService.signin.mockResolvedValue({ accessToken: 'mockedAccessToken' });
 
-      await signin(reqMocked, resMocked, nextMocked);
+      await signin(mockedReq, mockedRes, mockedNext);
 
-      expect(resMocked.status).toHaveBeenCalledWith(200);
-      expect(resMocked.json).toHaveBeenCalledWith({ accessToken: 'accessTokenMocked' });
+      expect(mockedRes.status).toHaveBeenCalledWith(200);
+      expect(mockedRes.json).toHaveBeenCalledWith({ accessToken: 'mockedAccessToken' });
     });
 
     it('should return error if user can be logged', async () => {
-      const reqMocked = {
+      const mockedReq = {
         body: {
           email: 'noUser@mail.com',
-          password: 'passwordMocked',
+          password: 'mockedPassword',
         },
       };
-      const resMocked = {
+      const mockedRes = {
         status: jest.fn().mockReturnThis(),
         error: jest.fn(),
       };
-      const nextMocked = jest.fn();
+      const mockedNext = jest.fn();
 
       authService.signin.mockResolvedValue({ error: 'Not Found' });
 
-      await signin(reqMocked, resMocked, nextMocked);
+      await signin(mockedReq, mockedRes, mockedNext);
 
-      expect(nextMocked).toHaveBeenCalled();
-      expect(nextMocked.mock.calls[0][0]).toBeInstanceOf(Error);
+      expect(mockedNext).toHaveBeenCalled();
+      expect(mockedNext.mock.calls[0][0]).toBeInstanceOf(Error);
     });
 
     it('should failed when something is wrong', async () => {
-      const reqMocked = {
+      const mockedReq = {
         body: {
           email: 'a@mail.com',
-          password: 'passwordMocked',
+          password: 'mockedPassword',
         },
       };
-      const resMocked = {
+      const mockedRes = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const nextMocked = jest.fn();
+      const mockedNext = jest.fn();
 
       authService.signin.mockRejectedValue('Error logining user');
 
-      await signin(reqMocked, resMocked, nextMocked);
+      await signin(mockedReq, mockedRes, mockedNext);
 
-      expect(resMocked.json).toHaveBeenCalledTimes(0);
-      expect(resMocked.status).toHaveBeenCalledTimes(0);
-      expect(nextMocked).toHaveBeenCalled();
-      expect(nextMocked.mock.calls[0][0]).toEqual('Error logining user');
+      expect(mockedRes.json).toHaveBeenCalledTimes(0);
+      expect(mockedRes.status).toHaveBeenCalledTimes(0);
+      expect(mockedNext).toHaveBeenCalled();
+      expect(mockedNext.mock.calls[0][0]).toEqual('Error logining user');
     });
   });
 
   describe('deleteUser ', () => {
     it('should delete an user', async () => {
-      const reqMocked = {
+      const mockedReq = {
         params: {
-          id: 'idMocked'
+          id: 'mockedId'
         },
       };
-      const resMocked = {
+      const mockedRes = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const nextMocked = jest.fn();
+      const mockedNext = jest.fn();
 
       authService.deleteUser.mockResolvedValue({ sucess: true });
 
-      await deleteUser(reqMocked, resMocked, nextMocked);
+      await deleteUser(mockedReq, mockedRes, mockedNext);
 
-      expect(resMocked.status).toHaveBeenCalledWith(200);
-      expect(resMocked.json).toHaveBeenCalledWith({ sucess: true });
+      expect(mockedRes.status).toHaveBeenCalledWith(200);
+      expect(mockedRes.json).toHaveBeenCalledWith({ sucess: true });
     });
 
     it('should failed when something is wrong', async () => {
-      const reqMocked = {
+      const mockedReq = {
         params: {
-          id: 'idMocked'
+          id: 'mockedId'
         },
       };
-      const resMocked = {
+      const mockedRes = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const nextMocked = jest.fn();
+      const mockedNext = jest.fn();
 
       authService.deleteUser.mockRejectedValue({ error: 'Error deleting user' });
 
-      await deleteUser(reqMocked, resMocked, nextMocked);
+      await deleteUser(mockedReq, mockedRes, mockedNext);
 
-      expect(resMocked.json).toHaveBeenCalledTimes(0);
-      expect(resMocked.status).toHaveBeenCalledTimes(0);
-      expect(nextMocked).toHaveBeenCalled();
-      expect(nextMocked.mock.calls[0][0]).toEqual({ error: 'Error deleting user' });
+      expect(mockedRes.json).toHaveBeenCalledTimes(0);
+      expect(mockedRes.status).toHaveBeenCalledTimes(0);
+      expect(mockedNext).toHaveBeenCalled();
+      expect(mockedNext.mock.calls[0][0]).toEqual({ error: 'Error deleting user' });
     });
   });
 });
