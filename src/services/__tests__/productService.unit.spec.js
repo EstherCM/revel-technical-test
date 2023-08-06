@@ -112,7 +112,7 @@ describe('[productService] unit test', () => {
 
       const result = await deleteProduct(id);
 
-      expect(result).toEqual({ sucess: true });
+      expect(result).toEqual({ success: true });
     });
 
     it('should return error if prodcuct can\'t be deleted', async () => {

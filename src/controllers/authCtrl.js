@@ -6,7 +6,7 @@ const signup = async (req, res, next) => {
   try {
     const createdUser = await authService.signup({ name, email, password });
 
-    res.status(201).json({ data: createdUser });
+    res.status(201).json(createdUser);
   } catch (e) {
     return next(e);
   }

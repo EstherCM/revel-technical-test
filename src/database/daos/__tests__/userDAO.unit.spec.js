@@ -69,7 +69,7 @@ describe('[userDAO] unit test', () => {
       getMock.mockResolvedValue(users[0]);
 
       const result = await get({ _id: '1' });
-console.log('result')
+
       expect(result).toEqual(users[0]);
       expect(getMock).toHaveBeenCalledWith({ _id: '1' });
     });

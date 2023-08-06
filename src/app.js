@@ -32,6 +32,8 @@ app.use((error, _req, res, _next) => {
   res.json(data);
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.info(`🏃 App running in port: ${port}`);
 });
+
+module.exports = { app, server };

@@ -30,14 +30,12 @@ describe('[productCtrl] unit test', () => {
 
       expect(mockedRes.status).toHaveBeenCalledWith(201);
       expect(mockedRes.json).toHaveBeenCalledWith({
-        data: {
-          _id: 'mockedId',
-          name: 'mockedName',
-          description: 'mockedDescription',
-          category: 'mockedCategory',
-          price: 1,
-          createdBy: 'mockedCreatedBy'
-        }
+        _id: 'mockedId',
+        name: 'mockedName',
+        description: 'mockedDescription',
+        category: 'mockedCategory',
+        price: 1,
+        createdBy: 'mockedCreatedBy'
       });
     });
 
@@ -89,16 +87,14 @@ describe('[productCtrl] unit test', () => {
       await getProducts(mockedReq, mockedRes, mockedNext);
 
       expect(mockedRes.status).toHaveBeenCalledWith(200);
-      expect(mockedRes.json).toHaveBeenCalledWith({
-        data: [{
-          _id: 'mockedId',
-          name: 'mockedName',
-          description: 'mockedDescription',
-          category: 'mockedCategory',
-          price: 1,
-          createdBy: 'mockedCreatedBy'
-        }]
-      });
+      expect(mockedRes.json).toHaveBeenCalledWith([{
+        _id: 'mockedId',
+        name: 'mockedName',
+        description: 'mockedDescription',
+        category: 'mockedCategory',
+        price: 1,
+        createdBy: 'mockedCreatedBy'
+      }]);
     });
 
     it('should failed when something is wrong', async () => {
@@ -152,16 +148,14 @@ describe('[productCtrl] unit test', () => {
       await updateProduct(mockedReq, mockedRes, mockedNext);
 
       expect(mockedRes.status).toHaveBeenCalledWith(200);
-      expect(mockedRes.json).toHaveBeenCalledWith({
-        data: [{
-          _id: 'mockedId',
-          name: 'mockedName2',
-          description: 'mockedDescription',
-          category: 'mockedCategory',
-          price: 1,
-          createdBy: 'mockedCreatedBy'
-        }]
-      });
+      expect(mockedRes.json).toHaveBeenCalledWith([{
+        _id: 'mockedId',
+        name: 'mockedName2',
+        description: 'mockedDescription',
+        category: 'mockedCategory',
+        price: 1,
+        createdBy: 'mockedCreatedBy'
+      }]);
     });
 
     it('should failed when something is wrong', async () => {
@@ -203,12 +197,12 @@ describe('[productCtrl] unit test', () => {
       };
       const mockedNext = jest.fn();
 
-      productService.deleteProduct.mockResolvedValue({ sucess: true });
+      productService.deleteProduct.mockResolvedValue({ success: true });
 
       await deleteProduct(mockedReq, mockedRes, mockedNext);
 
       expect(mockedRes.status).toHaveBeenCalledWith(200);
-      expect(mockedRes.json).toHaveBeenCalledWith({ sucess: true });
+      expect(mockedRes.json).toHaveBeenCalledWith({ success: true });
     });
 
     it('should failed when something is wrong', async () => {

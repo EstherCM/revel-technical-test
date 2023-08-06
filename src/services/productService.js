@@ -42,7 +42,7 @@ const deleteProduct = async (id) => {
     if (deletedCount !== 1) {
       return { error: 'Something was wrong. Product couldn\'t be removed' };
     }
-    return { sucess: true };
+    return { success: true };
   } catch (e) {
     return { error: e };
   }

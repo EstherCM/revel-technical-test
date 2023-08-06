@@ -163,7 +163,7 @@ describe('[authService] unit test', () => {
 
       const result = await deleteUser(id);
 
-      expect(result).toEqual({ sucess: true });
+      expect(result).toEqual({ success: true });
     });
 
     it('should return error if user can\'t be deleted', async () => {

@@ -29,11 +29,9 @@ describe('[authCtrl] unit test', () => {
 
       expect(mockedRes.status).toHaveBeenCalledWith(201);
       expect(mockedRes.json).toHaveBeenCalledWith({
-        data: {
-          _id: 'mockedId',
-          name: 'mockedName',
-          email: 'a@mail.com'
-        }
+        _id: 'mockedId',
+        name: 'mockedName',
+        email: 'a@mail.com'
       });
     });
 
@@ -141,12 +139,12 @@ describe('[authCtrl] unit test', () => {
       };
       const mockedNext = jest.fn();
 
-      authService.deleteUser.mockResolvedValue({ sucess: true });
+      authService.deleteUser.mockResolvedValue({ success: true });
 
       await deleteUser(mockedReq, mockedRes, mockedNext);
 
       expect(mockedRes.status).toHaveBeenCalledWith(200);
-      expect(mockedRes.json).toHaveBeenCalledWith({ sucess: true });
+      expect(mockedRes.json).toHaveBeenCalledWith({ success: true });
     });
 
     it('should failed when something is wrong', async () => {

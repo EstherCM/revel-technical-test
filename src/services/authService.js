@@ -46,7 +46,7 @@ const deleteUser = async (id) => {
     if (deletedCount !== 1) {
       return { error: 'Something was wrong. User couldn\'t be removed' };
     }
-    return { sucess: true };
+    return { success: true };
   } catch (e) {
     console.error(`🔥 Error deleting user ${e}`);
     return { error: e };
