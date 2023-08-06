@@ -38,7 +38,6 @@ schema.pre('save', async function (next) {
     }
   }
   next();
-
 });
 
 schema.methods.checkPassword = function (passwordToCompare) {
