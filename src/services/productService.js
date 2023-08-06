@@ -40,7 +40,7 @@ const deleteProduct = async (id) => {
     const { deletedCount } = await ProductDAO.remove(id);
 
     if (deletedCount !== 1) {
-      return { error: 'Something was wrong' };
+      return { error: 'Something was wrong. Product couldn\'t be removed' };
     }
     return { sucess: true };
   } catch (e) {
