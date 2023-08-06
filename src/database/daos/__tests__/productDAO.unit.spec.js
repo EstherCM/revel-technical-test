@@ -140,7 +140,7 @@ describe('[productDAO] unit test', () => {
 
     it('should delete a product', async () => {
       const id = 'mockedId';
-      const mockResult = { n: 1, deletedCount: 1, ok: 1 };
+      const mockResult = { deletedCount: 1 };
       deleteMock.mockResolvedValue(mockResult);
 
     const result = await remove(id);
