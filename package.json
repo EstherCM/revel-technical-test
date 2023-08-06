@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -19,7 +19,11 @@
   },
   "devDependencies": {
     "jest": "^29.6.2",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "verbose": true
   },
   "author": "Esther Carretón",
   "license": "ISC"

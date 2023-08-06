@@ -12,7 +12,7 @@ const createProduct = async ({ name, description, category, price }, createdBy) 
 const getProducts = async (query) => {
   const criterial = {};
 
-  const propsToFind = ['id', 'name', 'description', 'category', 'price'];
+  const propsToFind = ['_id', 'name', 'description', 'category', 'price'];
 
   propsToFind.forEach((prop) => {
     if (_.has(query, prop)) {
