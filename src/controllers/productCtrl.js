@@ -1,5 +1,4 @@
 const productService = require('../services/productService');
-const Product = require('../database/models/productModel');
 
 const createProduct = async (req, res, next) => {
   try {
