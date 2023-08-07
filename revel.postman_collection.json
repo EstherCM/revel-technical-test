@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "33d5631a-c55d-476d-8609-db67dc7ca84e",
+		"name": "revel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7691251"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Esther\",\r\n    \"email\": \"esther1@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"esther2@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2JkYzIzZDgyNTc3MDAxZTMxMGFmYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5MTA4MzA5OSwiZXhwIjoxNjkxMDg2Njk5fQ.kaHG7tERhkwqk-ccsHX-XGtrGoPiyBu3vZTO74Hjy30",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users/64cbd695e65a1ba75d26ffc0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"64cbd695e65a1ba75d26ffc0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "new product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2Y3MjEyYWQ2NDM1OGNmMDhjMTBiNCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkxMzE2NzcyLCJleHAiOjE2OTEzMjAzNzJ9.RKTuEVnFqAK6wIei4Ne91_JR0wX3hUj7Phl3kq8r9Rw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Empanada\",\r\n    \"description\": \"Mercadona\",\r\n    \"category\": \"Comida\",\r\n    \"price\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2JkYzIzZDgyNTc3MDAxZTMxMGFmYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5MTA4OTA3OCwiZXhwIjoxNjkxMDkyNjc4fQ.IQQSb65XYgxzVywBp4R4Zaode3k4rMHbe5OVXMAKe_E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2Y3MjEyYWQ2NDM1OGNmMDhjMTBiNCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkxMzE3NjM2LCJleHAiOjE2OTEzMjEyMzZ9.VDW7Qwosq113xmQCxvv03MfL0jjqoFNhTkAzXT1NaNY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 34,\r\n    \"name\": \"Gazpachitoo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/64cf724aad64358cf08c10b7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"64cf724aad64358cf08c10b7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2JkYzIzZDgyNTc3MDAxZTMxMGFmYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5MTA4Njc2NCwiZXhwIjoxNjkxMDkwMzY0fQ.50qkM5rh4DWZOhelhdhYJFhRcoJ6UtvKBLGArqAO_zo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/64cbf25606734ce1615f474f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"64cbf25606734ce1615f474f"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
