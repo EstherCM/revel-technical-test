@@ -14,7 +14,7 @@ const signin = async ({ email, password }) => {
     const foundUser = await userDAO.get({ email });
 
     if (!foundUser) {
-      console.log('🤷 User not found');
+      console.error('🤷 User not found');
       return { error: 'Not Found' };
     }
 

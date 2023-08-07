@@ -1,3 +1,5 @@
+const createError = require('http-errors');
+
 const validCreateProductEvent = (req, res, next) => {
   const { body: { name, description, category, price } } = req;
 

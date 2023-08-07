@@ -31,3 +31,5 @@ npm run test
 ```
 
 Ejecutará los test y mostrará la cobertura
+
+Para ejecutar los de integración no se puede tener levantado el servidor

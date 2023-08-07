@@ -21,12 +21,12 @@ describe('[productDAO] unit test', () => {
       const result = await create(mockedNewProduct);
 
       expect(result).toBeDefined();
-      expect(result._id).toBe(createdProduct._id);
-      expect(result.name).toBe(mockedNewProduct.name);
-      expect(result.description).toBe(mockedNewProduct.description);
-      expect(result.category).toBe(mockedNewProduct.category);
-      expect(result.price).toBe(mockedNewProduct.price);
-      expect(result.createdBy).toBe(mockedNewProduct.createdBy);
+      expect(result._id).toEqual(createdProduct._id);
+      expect(result.name).toEqual(mockedNewProduct.name);
+      expect(result.description).toEqual(mockedNewProduct.description);
+      expect(result.category).toEqual(mockedNewProduct.category);
+      expect(result.price).toEqual(mockedNewProduct.price);
+      expect(result.createdBy).toEqual(mockedNewProduct.createdBy);
     });
 
     it('should return error when product couldn\'t be created', async () => {

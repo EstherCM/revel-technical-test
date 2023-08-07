@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const createError = require('http-errors');
 
 const verifyToken = (req, _res, next) => {
   const authorization = req.header('Authorization');

@@ -19,11 +19,11 @@ describe('[userDAO] unit test', () => {
       const result = await create(mockedNewUser);
 
       expect(result).toBeDefined();
-      expect(result._id).toBe(createdUser._id);
-      expect(result.name).toBe(mockedNewUser.name);
-      expect(result.email).toBe(mockedNewUser.email);
-      expect(result.password).toBe(mockedNewUser.password);
-      expect(result.role).toBe('user');
+      expect(result._id).toEqual(createdUser._id);
+      expect(result.name).toEqual(mockedNewUser.name);
+      expect(result.email).toEqual(mockedNewUser.email);
+      expect(result.password).toEqual(mockedNewUser.password);
+      expect(result.role).toEqual('user');
     });
 
     it('should return error when user couldn\'t be created', async () => {

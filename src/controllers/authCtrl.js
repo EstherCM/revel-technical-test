@@ -40,4 +40,4 @@ module.exports = {
   signup,
   signin,
   deleteUser
-}
+};

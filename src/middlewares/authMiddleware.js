@@ -17,6 +17,7 @@ const checkDuplicateEmail = async (req, _res, next) => {
     const foundUser = await userDAO.get({ email: req.body.email });
 
     if (foundUser) {
+      console.error(`🔥 Error email is already in use`);
       return next(createError(400, 'Bad Request: Email is already in use'));
     }
     next();
@@ -52,7 +53,7 @@ const dataSecurity = async (req, _res, next) => {
       const [ foundProduct ] = await productDAO.getBy({ _id: productId });
   
       if (!foundProduct) {
-        console.error('❌ Product not found', productId);
+        console.error('🤷 Product not found', productId);
         return next(createError(404));
       }
 
@@ -75,4 +76,4 @@ module.exports = {
   validSignInEvent,
   checkPermissions,
   dataSecurity
-}
+};
